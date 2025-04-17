@@ -1,0 +1,43 @@
+ void OLED_DisplayWithText(const UBYTE *Image, const char *Text, sFONT
+ *Font,
+ UWORD Color_Foreground, UWORD Color_Background) {
+ UWORD page, column, temp;
+ UWORD textStartX = 64; // 텍스트가 시작되는 X 위치 (왼쪽 64px은 그림)
+ UWORD textStartY = 0; // 텍스트가 시작되는 Y 위치
+UWORD textWidth = 64; // 텍스트 출력 가능한 영역 (오른쪽 64px)
+ UWORD textHeight = 64; // 텍스트 출력 가능한 높이
+// 1. 그림 출력 (왼쪽 64px)
+ for (page = 0; page < 8; page++) { // 8 pages for 64-pixel height (8 x
+8 = 64)
+ OLED_1in3_WriteReg(0xB0 + page); // Set page address
+ OLED_1in3_WriteReg(0x02);
+ OLED_1in3_WriteReg(0x10);
+ // Set low column address
+ // Set high column address
+ for (column = 0; column < 64; column++) { // Only output the first
+ 64 columns
+ temp = Image[page * 128 + column];
+ OLED_1in3_WriteData(temp);
+ }
+ }
+ // 2. 텍스트 출력 (오른쪽 64px)
+ UWORD x = textStartX; // 텍스트 시작 X 좌표
+UWORD y = textStartY; // 텍스트 시작 Y 좌표
+while (*Text != '\0') {
+ // 2.1 X 방향이 텍스트 영역을 넘어가면 다음 줄로 이동
+if ((x + Font->Width) > (textStartX + textWidth)) {
+ x = textStartX;
+ y += Font->Height;
+ }
+ // 2.2 Y 방향이 텍스트 영역을 넘어가면 더 이상 출력하지 않음
+if ((y + Font->Height) > (textStartY + textHeight)) {
+ break;
+ }
+ // 2.3 문자 출력
+Paint_DrawChar(x, y, *Text, Font, Color_Foreground,
+ Color_Background);
+ // 다음 문자로 이동
+Text++;
+ x += Font->Width;
+ }
+ }
