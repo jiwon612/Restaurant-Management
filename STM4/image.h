@@ -1,0 +1,20 @@
+/*
+ *jongack.h
+ *
+ *Createdon:Nov25,2024
+ * Author:root
+ */
+ #ifndefINC_IMAGE_H_
+ #defineINC_IMAGE_H_
+ #include"stdint.h"
+ externconstuint16_tanSungJae[240][240];
+ externconstuint16_tSmallBites[240][240];
+ externconstuint16_tAlmondWithCavior[240][240];
+ externconstuint16_tBurdockTarteTatinWithSkinJuice[240][240];
+ externconstuint16_tEmberToastedAcornNoodle[240][240];
+ externconstuint16_tHearthOvenGrilledHanwoo[240][240];
+ externconstuint16_tSnowCrabAndPickledChrysanthemum[240][240];
+ externconstuint16_tTilefishMustardBrassica[240][240];
+ externconstuint16_tSmallSweet1[240][240];
+ externconstuint16_tSmallSweet2[240][240];
+ #endif/*INC_IMAGE_H_*/
