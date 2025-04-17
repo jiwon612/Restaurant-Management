@@ -1,0 +1,63 @@
+ /*
+ *stuffAlretUart.c
+ *
+ *Createdon:Nov25,2024
+ * Author:root
+ */
+ #include"stuffManage.h"
+ externUART_HandleTypeDefhuart2;
+ constchar*stuffToString(stuff index)
+ {
+ switch(index)
+ {
+ caseSeaweed:return"Seaweed";
+ casePotato:return"Potato";
+ caseSalmonRoe:return"SalmonRoe";
+ caseDeodeok:return"Deodeok";
+ caseRadish:return"Radish";
+ caseRedCabbage:return"RedCabbage";
+ caseAlmond:return"Almond";
+ caseCavior:return"Cavior";
+ caseTofu:return"Tofu";
+ caseEgg:return"Egg";
+ caseYuzu:return"Yuzu";
+ caseSnowcrab:return"Snowcrab";
+ caseBeansprouts:return"Beansprouts";
+ caseAblalone:return"Ablalone";
+ caseKoreanBeef :return"KoreanBeef";
+ caseApple:return"Apple";
+ caseOnion:return"Onion";
+ caseAcorn:return"Acorn";
+ caseTruffle:return"Truffle";
+ caseNoddle:return"Noddle";
+ caseSesame:return"Sesame";
+ caseBurdock:return"Burdock";
+ caseTilefish:return"Tilefish";
+caseMustard:return"Mustard";
+ caseBrassica:return"Brassica";
+ caseTuna:return"Tuna";
+ caseHibiscus:return"Hibiscus";
+ casePeanut :return"Peanut";
+ caseHoneyCookie:return"HoneyCookie";
+ caseKombucha:return"Kombucha";
+ default:return"InvalidStuff";
+ }
+ }
+ voidtransmitString(constchar*message)
+ {
+ HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),1000);
+ }
+ voidprintRemainingStuff(stuff index)
+ {
+ if(index<=Kombucha)
+ {
+ charmessage[50];
+ sprintf(message,"remaining%s:%d\r\n",stuffToString(index),
+ remainingStuff[index]);
+ transmitString(message);
+ }
+ else
+ {
+ transmitString("Invalidstuff\r\n");
+ }
+ }
